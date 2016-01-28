@@ -1,6 +1,5 @@
 package it.tiwiz.rxjavacrunch.part1;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -11,6 +10,13 @@ import butterknife.ButterKnife;
 import it.tiwiz.rxjavacrunch.R;
 import rx.Observable;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.functions.Func2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Part1Activity extends ActionBarActivity {
 
@@ -40,6 +46,12 @@ public class Part1Activity extends ActionBarActivity {
      */
     private Subscriber<? super String> mToastSubscriber;
 
+    private List<String> mWordList = new ArrayList<String>() {{
+        add("1");
+        add("3");
+        add("9");
+    }};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,16 +61,63 @@ public class Part1Activity extends ActionBarActivity {
         ButterKnife.bind(this);
 
         // create the Observable from a function - Observable.create(observableAction)
-        initObservable();
-        mObservable = Observable.create(mObservableFunction);
+//        initObservableFunction();
+//        mObservable = Observable.create(mObservableFunction);
+        final Observable<String> singleObservable = Observable.just("what up world?");
 
         // invoke the subscribers/observers
-        initSubscribers();
+//        initSubscribers();
 
-        // do the subscription
+//        mObservable.subscribe(mTextViewSubscriber);
+//        mObservable.subscribe(mToastSubscriber);
+
+        // actions do not return anything
+        Action1<String> textViewOnNextAction = s -> mTextView.setText(s);
+        Action1<String> toastOnNextAction = s -> Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        // functions take input and return output
+        Func1<String, String> toUpperCase = s -> s.toUpperCase();
+
+        // do the subscriptions
+        // let observers take emissions on a particular thread (here, main)
+        // subscribeOn would make the Observable *itself* operate on the particular thread as well
+        singleObservable
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(toUpperCase)
+                .subscribe(textViewOnNextAction);
+
+        // from() emits each element in the iterable one at a time
+        final Observable<String> oneByOneObservable = Observable.from(mWordList);
+        oneByOneObservable.map(toUpperCase).subscribe(toastOnNextAction);
+
+        sumStringsObservable();
     }
 
-    private void initObservable() {
+    /**
+     * Sum all the strings
+     */
+    private void sumStringsObservable() {
+        // emit a full list in a single shot and then process each element into another observable
+        // then merge all those into one string
+
+        // [x1, x2, x3]
+        // x1 -- x2 --x3
+        // map to numbers
+        // reduce to sum
+        final Func1<List<String>, Observable<String>> getStringNums = Observable::from;
+        final Func1<String, Integer> toNumber = s -> Integer.parseInt(s);
+        final Func2<Integer, Integer, Integer> sumList = (accum, currEl) -> accum + currEl;
+
+        final Observable<Integer> sumObservable = Observable
+                .just(mWordList)
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(getStringNums)
+                .map(toNumber)
+                .reduce(sumList);
+
+        sumObservable.subscribe(sum -> Toast.makeText(this, "got sum! " + sum, Toast.LENGTH_SHORT).show());
+    }
+
+    private void initObservableFunction() {
         mObservableFunction = new Observable.OnSubscribe<String>() {
             @Override
             public void call(Subscriber<? super String> subscriber) {
@@ -100,11 +159,10 @@ public class Part1Activity extends ActionBarActivity {
             }
         };
 
-        final Context context = this;
         mToastSubscriber = new Subscriber<String>() {
             @Override
             public void onNext(String s) {
-                Toast.makeText(context, s, Toast.LENGTH_LONG).show();
+                Toast.makeText(Part1Activity.this, s, Toast.LENGTH_LONG).show();
             }
 
             @Override
