@@ -1,14 +1,11 @@
 package it.tiwiz.rxjavacrunch;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
-
 import it.tiwiz.rxjavacrunch.part1.Part1Activity;
-
+import it.tiwiz.rxjavacrunch.part3.Part3Activity;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
@@ -22,6 +19,8 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     private void wireUi() {
         setTapListener(R.id.btnPart1);
+        setTapListener(R.id.btnPart2);
+        setTapListener(R.id.btnPart3);
     }
 
     private void setTapListener(int viewId) {
@@ -37,9 +36,13 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         Intent launchIntent = null;
 
         switch (viewId) {
-            case R.id.btnPart1:
-                launchIntent = new Intent(this, Part1Activity.class);
-                break;
+        case R.id.btnPart1:
+        case R.id.btnPart2:
+            launchIntent = new Intent(this, Part1Activity.class);
+            break;
+        case R.id.btnPart3:
+            launchIntent = new Intent(this, Part3Activity.class);
+            break;
         }
 
         return launchIntent;

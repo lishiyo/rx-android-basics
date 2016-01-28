@@ -72,10 +72,10 @@ public class Part1Activity extends ActionBarActivity {
 //        mObservable.subscribe(mToastSubscriber);
 
         // actions do not return anything
-        Action1<String> textViewOnNextAction = s -> mTextView.setText(s);
+        Action1<String> textViewOnNextAction = mTextView::setText;
         Action1<String> toastOnNextAction = s -> Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
         // functions take input and return output
-        Func1<String, String> toUpperCase = s -> s.toUpperCase();
+        Func1<String, String> toUpperCase = String::toUpperCase;
 
         // do the subscriptions
         // let observers take emissions on a particular thread (here, main)
@@ -104,7 +104,7 @@ public class Part1Activity extends ActionBarActivity {
         // map to numbers
         // reduce to sum
         final Func1<List<String>, Observable<String>> getStringNums = Observable::from;
-        final Func1<String, Integer> toNumber = s -> Integer.parseInt(s);
+        final Func1<String, Integer> toNumber = Integer::parseInt;
         final Func2<Integer, Integer, Integer> sumList = (accum, currEl) -> accum + currEl;
 
         final Observable<Integer> sumObservable = Observable
