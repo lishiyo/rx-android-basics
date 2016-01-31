@@ -21,7 +21,7 @@ public class Part3Activity extends AppCompatActivity {
 	final String[] manyWords = {"Hello", "to", "everyone", "from", "RxAndroid",
 			"something", "that", "is", "really", "nice"};
 
-	final List<String> manyWordList = Arrays.asList(manyWords);
+	final List<String> manyWordList = Arrays.asList(manyWords); // turn array to list
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +47,16 @@ public class Part3Activity extends AppCompatActivity {
 				.subscribe(message ->
 						Toast.makeText(Part3Activity.this, message, Toast.LENGTH_SHORT).show());
 
+		/**
+		 * ------[x, x, x]----- // Observable.just
+		 * ------[x...][x...][x...]------ // Observable.from(list)
+		 * -------x--x--x------- // flatMap
+		 * -------------xxx----- // reduce
+		 */
 		Observable.just(manyWordList)
 				.observeOn(AndroidSchedulers.mainThread())
 				.flatMap(Observable::from)
-				.reduce((s, s1) -> String.format("%s %s", s, s1))
+				.reduce((accumStr, currWord) -> String.format("%s %s", accumStr, currWord))
 				.subscribe(message ->
 						Snackbar.make(rootView, message, Snackbar.LENGTH_LONG).show());
 

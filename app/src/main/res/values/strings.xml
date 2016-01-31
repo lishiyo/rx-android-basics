@@ -4,5 +4,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_part1">Part1Activity</string>
-    <string name="title_activity_part3">Part3Activity</string>
+    <string name="title_activity_part3">Part 3: Refactoring</string>
+    <string name="title_activity_part4">Part 4: RxJava + Retrofit 2 - Github Users</string>
 </resources>
