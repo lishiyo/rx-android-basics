@@ -31,7 +31,20 @@
         </activity>
         <activity
             android:name=".part5.Part5Activity"
+            android:parentActivityName=".MainActivity"
             android:label="@string/title_activity_part5" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.tiwiz.rxjavacrunch.MainActivity" />
+        </activity>
+        <activity
+            android:name=".part6.Part6Activity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_part6" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.tiwiz.rxjavacrunch.MainActivity" />
         </activity>
     </application>
 
