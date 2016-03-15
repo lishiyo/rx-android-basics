@@ -1,4 +1,4 @@
-package it.tiwiz.rxjavacrunch.part4;
+package it.tiwiz.rxjavacrunch.models.github;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

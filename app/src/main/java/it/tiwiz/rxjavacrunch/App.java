@@ -2,9 +2,10 @@ package it.tiwiz.rxjavacrunch;
 
 import android.support.annotation.Nullable;
 import it.tiwiz.rxjavacrunch.networking.GithubService;
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
-import retrofit.RxJavaCallAdapterFactory;
+import it.tiwiz.rxjavacrunch.networking.OpenWeatherService;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Singleton app instance.
@@ -17,6 +18,8 @@ public class App {
 	private static App mInstance = null;
 	@Nullable
 	private static GithubService mGithubService;
+	@Nullable
+	private static OpenWeatherService mWeatherService;
 
 	private App() {
 
@@ -35,7 +38,7 @@ public class App {
 	}
 
 	/**
-	 * Return singleton instance of app's {@link GithubService}
+	 * @return singleton instance of app's {@link GithubService}
 	 */
 	public static GithubService getGithubService() {
 		if (mGithubService == null) {
@@ -52,5 +55,23 @@ public class App {
 		}
 
 		return mGithubService;
+	}
+
+	/**
+	 * @return singleton instance of open weather service
+	 */
+	public static OpenWeatherService getWeatherService() {
+		if (mWeatherService == null) {
+			// Create the weather service
+			final Retrofit retrofit = new Retrofit.Builder()
+					.addCallAdapterFactory(RxJavaCallAdapterFactory.create()) // turn to observable!
+					.addConverterFactory(GsonConverterFactory.create())
+					.baseUrl(OpenWeatherService.BASE_URL)
+					.build();
+
+			mWeatherService = retrofit.create(OpenWeatherService.class);
+		}
+
+		return mWeatherService;
 	}
 }

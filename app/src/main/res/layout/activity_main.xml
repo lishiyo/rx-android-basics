@@ -47,6 +47,6 @@
     <Button
         style="@style/RxButton"
         android:id="@+id/btnPart7"
-        android:text="7 - Weather App"
+        android:text="@string/title_activity_part7"
         android:layout_below="@id/btnPart6"/>
 </RelativeLayout>

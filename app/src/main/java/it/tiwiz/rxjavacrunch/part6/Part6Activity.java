@@ -75,7 +75,9 @@ public class Part6Activity extends RxAppCompatActivity {
 	 * Edit text subscription.
 	 */
 	private void manageEditTexts() {
-		RxTextView.textChanges(mReactiveEditText).subscribe(this::onNewTextChanged);
+		RxTextView.textChanges(mReactiveEditText)
+				.compose(bindToLifecycle())
+				.subscribe(this::onNewTextChanged);
 	}
 
 	/**

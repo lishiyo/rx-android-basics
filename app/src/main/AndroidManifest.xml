@@ -47,10 +47,10 @@
                 android:value="it.tiwiz.rxjavacrunch.MainActivity" />
         </activity>
         <activity
-            android:name=".part7.Part7Activity"
+            android:name=".part7.WeatherActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/title_activity_part6" >
+            android:label="@string/title_activity_part7" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.tiwiz.rxjavacrunch.MainActivity" />

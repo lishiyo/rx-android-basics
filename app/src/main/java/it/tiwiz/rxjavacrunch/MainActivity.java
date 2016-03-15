@@ -9,7 +9,7 @@ import it.tiwiz.rxjavacrunch.part3.Part3Activity;
 import it.tiwiz.rxjavacrunch.part4.Part4Activity;
 import it.tiwiz.rxjavacrunch.part5.Part5Activity;
 import it.tiwiz.rxjavacrunch.part6.Part6Activity;
-import it.tiwiz.rxjavacrunch.part7.Part7Activity;
+import it.tiwiz.rxjavacrunch.part7.WeatherActivity;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
@@ -27,6 +27,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         setTapListener(R.id.btnPart4);
         setTapListener(R.id.btnPart5);
         setTapListener(R.id.btnPart6);
+        setTapListener(R.id.btnPart7);
     }
 
     private void setTapListener(int viewId) {
@@ -58,7 +59,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             launchIntent = new Intent(this, Part6Activity.class);
             break;
         case R.id.btnPart7:
-            launchIntent = new Intent(this, Part7Activity.class);
+            launchIntent = new Intent(this, WeatherActivity.class);
             break;
         }
 

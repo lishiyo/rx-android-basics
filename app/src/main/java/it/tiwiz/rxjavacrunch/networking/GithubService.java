@@ -1,9 +1,9 @@
 package it.tiwiz.rxjavacrunch.networking;
 
-import it.tiwiz.rxjavacrunch.part4.GitHubRepo;
-import it.tiwiz.rxjavacrunch.part4.GitHubUser;
-import retrofit.http.GET;
-import retrofit.http.Path;
+import it.tiwiz.rxjavacrunch.models.github.GitHubRepo;
+import it.tiwiz.rxjavacrunch.models.github.GitHubUser;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 
 import java.util.List;

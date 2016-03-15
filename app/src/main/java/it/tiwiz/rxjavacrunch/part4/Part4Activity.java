@@ -8,6 +8,7 @@ import android.util.Log;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import it.tiwiz.rxjavacrunch.App;
+import it.tiwiz.rxjavacrunch.models.github.GitHubUser;
 import it.tiwiz.rxjavacrunch.networking.GithubService;
 import it.tiwiz.rxjavacrunch.R;
 import it.tiwiz.rxjavacrunch.Utils;

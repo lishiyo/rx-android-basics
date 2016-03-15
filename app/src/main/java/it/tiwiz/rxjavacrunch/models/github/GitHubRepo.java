@@ -1,4 +1,4 @@
-package it.tiwiz.rxjavacrunch.part4;
+package it.tiwiz.rxjavacrunch.models.github;
 
 /**
  * Created by connieli on 1/31/16.

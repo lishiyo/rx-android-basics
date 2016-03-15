@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import it.tiwiz.rxjavacrunch.R;
+import it.tiwiz.rxjavacrunch.models.github.GitHubUser;
 
 import java.util.ArrayList;
 import java.util.List;
