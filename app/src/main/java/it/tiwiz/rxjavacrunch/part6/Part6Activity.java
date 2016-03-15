@@ -108,7 +108,7 @@ public class Part6Activity extends RxAppCompatActivity {
 	private void onSnackbarDismissed(final Integer code) {
 		final String res = "onSnackbarDismissed! passed: " + code;
 		Log.i(App.TAG, res);
-		Toast.makeText(this, res, Toast.LENGTH_SHORT);
+		Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
 	}
 
 	/**
@@ -126,7 +126,6 @@ public class Part6Activity extends RxAppCompatActivity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.part6, menu);
-
 		return true;
 	}
 }

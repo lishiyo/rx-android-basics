@@ -1,4 +1,4 @@
-package it.tiwiz.rxjavacrunch;
+package it.tiwiz.rxjavacrunch.networking;
 
 import it.tiwiz.rxjavacrunch.part4.GitHubRepo;
 import it.tiwiz.rxjavacrunch.part4.GitHubUser;

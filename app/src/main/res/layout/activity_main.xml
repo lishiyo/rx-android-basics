@@ -12,36 +12,41 @@
     <Button
         style="@style/RxButton"
         android:id="@+id/btnPart1"
-        android:text="Part 1" />
+        android:text="1/2 - Toasts" />
 
-    <Button
-        style="@style/RxButton"
-        android:id="@+id/btnPart2"
-        android:text="Part 2"
-        android:layout_below="@id/btnPart1"/>
+    <!--<Button-->
+        <!--style="@style/RxButton"-->
+        <!--android:id="@+id/btnPart2"-->
+        <!--android:text="Part 2"-->
+        <!--android:layout_below="@id/btnPart1"/>-->
 
     <Button
         style="@style/RxButton"
         android:id="@+id/btnPart3"
-        android:text="Part 3"
-        android:layout_below="@id/btnPart2"/>
+        android:text="3 - Refactoring"
+        android:layout_below="@id/btnPart1"/>
 
     <Button
         style="@style/RxButton"
         android:id="@+id/btnPart4"
-        android:text="Part 4"
+        android:text="4 - GitHub"
         android:layout_below="@id/btnPart3"/>
 
     <Button
         style="@style/RxButton"
         android:id="@+id/btnPart5"
-        android:text="Part 5"
+        android:text="5 - RxLifecycle"
         android:layout_below="@id/btnPart4"/>
 
     <Button
         style="@style/RxButton"
         android:id="@+id/btnPart6"
-        android:text="Part 6"
+        android:text="6 - RxViews"
         android:layout_below="@id/btnPart5"/>
 
+    <Button
+        style="@style/RxButton"
+        android:id="@+id/btnPart7"
+        android:text="7 - Weather App"
+        android:layout_below="@id/btnPart6"/>
 </RelativeLayout>

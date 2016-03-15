@@ -5,7 +5,8 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_part1">Part1Activity</string>
     <string name="title_activity_part3">Part 3: Refactoring</string>
-    <string name="title_activity_part4">Part 4: RxJava + Retrofit 2 - Github Users</string>
+    <string name="title_activity_part4">Part 4: RxJava + Retrofit - Github Users</string>
     <string name="title_activity_part5">Part 5: RxLifecycle</string>
     <string name="title_activity_part6">Part 6: RxBindings</string>
+    <string name="title_activity_part7">Part 7: Weather App</string>
 </resources>

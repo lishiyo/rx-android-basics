@@ -47,9 +47,9 @@ public class Part1Activity extends ActionBarActivity {
     private Subscriber<? super String> mToastSubscriber;
 
     private List<String> mWordList = new ArrayList<String>() {{
-        add("1");
-        add("3");
-        add("9");
+        add("One");
+        add("Two");
+        add("Three");
     }};
 
     @Override
@@ -67,35 +67,41 @@ public class Part1Activity extends ActionBarActivity {
 
         // invoke the subscribers/observers
 //        initSubscribers();
-
 //        mObservable.subscribe(mTextViewSubscriber);
 //        mObservable.subscribe(mToastSubscriber);
 
         // actions do not return anything
-        Action1<String> textViewOnNextAction = mTextView::setText;
-        Action1<String> toastOnNextAction = s -> Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
+        Action1<Integer> textViewOnNextAction = s -> mTextView.setText("got str length: " + s);
+        Action1<String> toastOnNextAction = s -> Toast.makeText(this, "upper cased: " + s, Toast.LENGTH_SHORT).show();
         // functions take input and return output
         Func1<String, String> toUpperCase = String::toUpperCase;
+        Func1<String, Integer> toStringLength = String::length;
 
-        // do the subscriptions
+        // errors
+        Action1<Throwable> onErrorCallback = err -> Toast.makeText(this, err.getLocalizedMessage(),
+                Toast.LENGTH_SHORT).show();
+
+        // Do the subscriptions
         // let observers take emissions on a particular thread (here, main)
         // subscribeOn would make the Observable *itself* operate on the particular thread as well
         singleObservable
                 .observeOn(AndroidSchedulers.mainThread())
-                .map(toUpperCase)
-                .subscribe(textViewOnNextAction);
+                .map(toStringLength)
+                .subscribe(textViewOnNextAction, onErrorCallback);
 
         // from() emits each element in the iterable one at a time
         final Observable<String> oneByOneObservable = Observable.from(mWordList);
-        oneByOneObservable.map(toUpperCase).subscribe(toastOnNextAction);
+        oneByOneObservable
+                .map(toUpperCase)
+                .subscribe(toastOnNextAction, onErrorCallback);
 
-        sumStringsObservable();
+        toastWordListSum();
     }
 
     /**
      * Sum all the strings
      */
-    private void sumStringsObservable() {
+    private void toastWordListSum() {
         // emit a full list in a single shot and then process each element into another observable
         // then merge all those into one string
 
@@ -109,12 +115,12 @@ public class Part1Activity extends ActionBarActivity {
 
         final Observable<Integer> sumObservable = Observable
                 .just(mWordList)
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread()) // put this right after the emission
                 .flatMap(getStringNums)
                 .map(toNumber)
                 .reduce(sumList);
 
-        sumObservable.subscribe(sum -> Toast.makeText(this, "got sum! " + sum, Toast.LENGTH_SHORT).show());
+        sumObservable.subscribe(sum -> Toast.makeText(this, "total sum of word list: " + sum, Toast.LENGTH_SHORT).show());
     }
 
     private void initObservableFunction() {

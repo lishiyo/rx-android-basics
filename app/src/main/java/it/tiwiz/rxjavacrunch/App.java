@@ -1,12 +1,13 @@
 package it.tiwiz.rxjavacrunch;
 
 import android.support.annotation.Nullable;
+import it.tiwiz.rxjavacrunch.networking.GithubService;
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
 
 /**
- * Singleton app.
+ * Singleton app instance.
  *
  * Created by connieli on 1/31/16.
  */
@@ -18,6 +19,7 @@ public class App {
 	private static GithubService mGithubService;
 
 	private App() {
+
 	}
 
 	public static App getInstance() {

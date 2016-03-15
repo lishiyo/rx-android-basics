@@ -8,7 +8,7 @@ import android.util.Log;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import it.tiwiz.rxjavacrunch.App;
-import it.tiwiz.rxjavacrunch.GithubService;
+import it.tiwiz.rxjavacrunch.networking.GithubService;
 import it.tiwiz.rxjavacrunch.R;
 import it.tiwiz.rxjavacrunch.Utils;
 import rx.Observable;
@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by connieli on 1/31/16.
  */
-public class Part4Activity extends AppCompatActivity implements OnRVItemClickListener {
+public class Part4Activity extends AppCompatActivity implements GithubUserClickListener {
 	public final List<String> mUserNames = Arrays.asList("lishiyo", "tiwiz", "staltz", "dlew");
 	private final GithubService mGithubService = App.getGithubService();
 	private GitHubUsersAdapter mAdapter;
@@ -33,7 +33,6 @@ public class Part4Activity extends AppCompatActivity implements OnRVItemClickLis
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_part4);
 		ButterKnife.bind(this);
-		Log.i(App.TAG, "part 4 oncreate!");
 
 		// init recycler view
 		LinearLayoutManager llm = new LinearLayoutManager(this);

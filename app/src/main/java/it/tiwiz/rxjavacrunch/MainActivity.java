@@ -9,6 +9,7 @@ import it.tiwiz.rxjavacrunch.part3.Part3Activity;
 import it.tiwiz.rxjavacrunch.part4.Part4Activity;
 import it.tiwiz.rxjavacrunch.part5.Part5Activity;
 import it.tiwiz.rxjavacrunch.part6.Part6Activity;
+import it.tiwiz.rxjavacrunch.part7.Part7Activity;
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
@@ -22,7 +23,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     private void wireUi() {
         setTapListener(R.id.btnPart1);
-        setTapListener(R.id.btnPart2);
         setTapListener(R.id.btnPart3);
         setTapListener(R.id.btnPart4);
         setTapListener(R.id.btnPart5);
@@ -43,7 +43,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         switch (viewId) {
         case R.id.btnPart1:
-        case R.id.btnPart2:
             launchIntent = new Intent(this, Part1Activity.class);
             break;
         case R.id.btnPart3:
@@ -57,6 +56,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             break;
         case R.id.btnPart6:
             launchIntent = new Intent(this, Part6Activity.class);
+            break;
+        case R.id.btnPart7:
+            launchIntent = new Intent(this, Part7Activity.class);
             break;
         }
 

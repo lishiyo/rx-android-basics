@@ -11,6 +11,9 @@ import rx.schedulers.Schedulers;
  */
 public class Utils {
 
+	/**
+	 * Do work on worker, output on main.
+	 */
 	final static Observable.Transformer<Observable, Observable> schedulersTransformer =
 			observable -> observable.subscribeOn(Schedulers.io())
 					.observeOn(AndroidSchedulers.mainThread());
@@ -25,4 +28,18 @@ public class Utils {
 	public static <T> Observable.Transformer<T, T> applySchedulers() {
 		return (Observable.Transformer<T, T>) schedulersTransformer;
 	}
+
+	/**
+	 * @return a fake long operation
+	 */
+	public static String mockLongRunningOperation() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// error
+		}
+
+		return "Complete!";
+	}
+
 }

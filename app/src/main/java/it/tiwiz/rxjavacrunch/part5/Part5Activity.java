@@ -34,12 +34,25 @@ public class Part5Activity extends RxAppCompatActivity {
 		Observable.interval(1, TimeUnit.SECONDS)
 				.compose(Utils.applySchedulers())
 				.compose(bindToLifecycle())
+				.filter(this::transformInterval)
+				.map(s -> "in evens: " + s)
 				.subscribe(this::logOnNext, this::logOnError, this::logOnCompleted);
 	}
 
-	private void logOnNext(Long time) {
-		textEmittedNumber.setText(String.valueOf(time));
-		Log.d(TAG, "Nothing bad happened for " + time + " seconds");
+	/**
+	 * Takes in the input => outputs whether to pass it on.
+	 *
+	 * @param time
+	 *      the input
+	 * @return true to pass on the time
+	 */
+	private boolean transformInterval(final Long time) {
+		return time % 2 == 0;
+	}
+
+	private void logOnNext(final String string) {
+		textEmittedNumber.setText(string);
+		Log.d(TAG, "Nothing bad happened for " + string + " seconds");
 	}
 
 	private void logOnError(Throwable throwable) {

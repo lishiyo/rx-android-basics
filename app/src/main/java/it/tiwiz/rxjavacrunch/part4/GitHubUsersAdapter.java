@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import it.tiwiz.rxjavacrunch.R;
 
 import java.util.ArrayList;
@@ -19,9 +19,9 @@ import java.util.List;
 public class GitHubUsersAdapter extends RecyclerView.Adapter<GitHubUsersAdapter.DataHolder> {
 
 	private List<GitHubUser> users = new ArrayList<>();
-	private final OnRVItemClickListener listener;
+	private final GithubUserClickListener listener;
 
-	public GitHubUsersAdapter(final OnRVItemClickListener listener) {
+	public GitHubUsersAdapter(final GithubUserClickListener listener) {
 		this.listener = listener;
 	}
 
@@ -59,9 +59,9 @@ public class GitHubUsersAdapter extends RecyclerView.Adapter<GitHubUsersAdapter.
 		private final TextView userName;
 		private final TextView userLogin;
 		private final TextView userPage;
-		private final OnRVItemClickListener listener;
+		private final GithubUserClickListener listener;
 
-		public DataHolder(final View itemView, final OnRVItemClickListener listener) {
+		public DataHolder(final View itemView, final GithubUserClickListener listener) {
 			super(itemView);
 			userPicture = (ImageView) itemView.findViewById(R.id.userPicture);
 			userName = (TextView) itemView.findViewById(R.id.userName);
@@ -83,9 +83,8 @@ public class GitHubUsersAdapter extends RecyclerView.Adapter<GitHubUsersAdapter.
 			userLogin.setText(user.getLogin());
 			userPage.setText(user.getReposUrl());
 
-			Picasso.with(userPicture.getContext())
+			Glide.with(userPicture.getContext())
 					.load(user.getAvatarUrl())
-//					.placeholder(R.drawable.ic_placeholder)
 					.into(userPicture);
 		}
 
