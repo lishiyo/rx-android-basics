@@ -4,13 +4,13 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-
 	<EditText
 		android:id="@+id/edit_input"
 		android:layout_width="match_parent"
 		android:layout_height="48dp"
 		/>
 
+	<!-- results -->
 	<TextView
 		android:id="@+id/name"
 		android:layout_width="match_parent"
@@ -23,6 +23,18 @@
 
 	<TextView
 		android:id="@+id/temperature"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+
+	<!-- DEMO: append strings as you toggle them -->
+	<TextView
+		android:id="@+id/toggles_results"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+
+	<!-- DEMO: list of smart switch toggles -->
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/toggles_list"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" />
 

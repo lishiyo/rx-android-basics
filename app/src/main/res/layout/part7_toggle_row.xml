@@ -1,0 +1,24 @@
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal"
+	android:layout_width="match_parent"
+	android:paddingLeft="20dp"
+	android:paddingRight="20dp"
+	android:layout_height="50dp">
+
+	<TextView
+		android:id="@+id/tour_guide_name"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:layout_gravity="left|center_vertical"
+		android:layout_alignParentLeft="true"
+		android:gravity="left" />
+
+	<it.tiwiz.rxjavacrunch.part7.SmartSwitch
+		android:id="@+id/toggle_switch"
+		android:layout_gravity="right|center_vertical"
+		android:layout_alignParentRight="true"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent" />
+
+</RelativeLayout>

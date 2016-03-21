@@ -8,10 +8,10 @@ import android.util.Log;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import it.tiwiz.rxjavacrunch.App;
-import it.tiwiz.rxjavacrunch.models.github.GitHubUser;
-import it.tiwiz.rxjavacrunch.networking.GithubService;
 import it.tiwiz.rxjavacrunch.R;
 import it.tiwiz.rxjavacrunch.Utils;
+import it.tiwiz.rxjavacrunch.models.github.GitHubUser;
+import it.tiwiz.rxjavacrunch.networking.GithubService;
 import rx.Observable;
 import rx.Subscriber;
 
@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Created by connieli on 1/31/16.
  */
-public class Part4Activity extends AppCompatActivity implements GithubUserClickListener {
+public class GithubUsersActivity extends AppCompatActivity implements GithubUserClickListener {
 	public final List<String> mUserNames = Arrays.asList("lishiyo", "tiwiz", "staltz", "dlew");
 	private final GithubService mGithubService = App.getGithubService();
 	private GitHubUsersAdapter mAdapter;

@@ -2,6 +2,8 @@ package it.tiwiz.rxjavacrunch.part7;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +19,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.observers.SafeSubscriber;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,7 +29,7 @@ import java.util.concurrent.TimeUnit;
  *
  * @author connieli
  */
-public class WeatherActivity extends RxAppCompatActivity {
+public class WeatherActivity extends RxAppCompatActivity implements OnToggleListener {
 
 	@Bind(R.id.edit_input)
 	EditText mSearchInput;
@@ -54,12 +58,14 @@ public class WeatherActivity extends RxAppCompatActivity {
 		// TODO: add retry logic
 		RxTextView.textChanges(mSearchInput)
 				.compose(bindToLifecycle())
-				.skip(1)
-				.debounce(400, TimeUnit.MILLISECONDS) // default Scheduler is Computation
+				.skip(1) // avoid first
+				.debounce(400, TimeUnit.MILLISECONDS) // default debounce Scheduler is Computation
 				// use switchMap rather than flatMap to cancel previous request
 				.switchMap(s -> App.getWeatherService().getCityWeather(OpenWeatherService.APPID, s.toString()))
 				.observeOn(AndroidSchedulers.mainThread())
 				.subscribe(new SafeSubscriber<>(getResultsSubscriber()));
+
+		setupTogglesList();
 	}
 
 	/**
@@ -113,5 +119,46 @@ public class WeatherActivity extends RxAppCompatActivity {
 		mName.setText("Name: " + name);
 		mTemp.setText("Current temp: " + String.valueOf(temp));
 		mDescription.setText("Current description: " + description);
+	}
+
+	/**
+	 * =====================================================================
+	 * Rx Toggles
+	 * =====================================================================
+	 */
+	public final List<String> mDummyItems = Arrays.asList("one", "two", "three", "four", "five", "six", "seven",
+			"eight", "nine", "ten");
+
+	private RxTogglesAdapter mTogglesAdapter;
+
+	@Bind(R.id.toggles_list)
+	RecyclerView mTogglesList;
+
+	@Bind(R.id.toggles_results)
+	TextView mTogglesResults;
+
+	/**
+	 * Set up rx recycler view for toggles.
+	 */
+	private void setupTogglesList() {
+		// init recycler view
+		final LinearLayoutManager llm = new LinearLayoutManager(this);
+		llm.setOrientation(LinearLayoutManager.VERTICAL);
+		mTogglesList.setLayoutManager(llm);
+
+		// init and set adapter
+		mTogglesAdapter = new RxTogglesAdapter(this);
+		mTogglesList.setAdapter(mTogglesAdapter);
+
+		// set mock items
+		mTogglesAdapter.setItems(mDummyItems);
+	}
+
+	@Override
+	public void onToggle(final String toggleItem, boolean isChecked) {
+		// TODO: rx-ify?
+		final String res = "toggled! " + toggleItem + " is checked?" + isChecked;
+		Toast.makeText(this, res, Toast.LENGTH_LONG).show();
+
 	}
 }

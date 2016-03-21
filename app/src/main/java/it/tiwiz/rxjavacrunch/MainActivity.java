@@ -6,7 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import it.tiwiz.rxjavacrunch.part1.Part1Activity;
 import it.tiwiz.rxjavacrunch.part3.Part3Activity;
-import it.tiwiz.rxjavacrunch.part4.Part4Activity;
+import it.tiwiz.rxjavacrunch.part4.GithubUsersActivity;
 import it.tiwiz.rxjavacrunch.part5.Part5Activity;
 import it.tiwiz.rxjavacrunch.part6.Part6Activity;
 import it.tiwiz.rxjavacrunch.part7.WeatherActivity;
@@ -50,7 +50,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             launchIntent = new Intent(this, Part3Activity.class);
             break;
         case R.id.btnPart4:
-            launchIntent = new Intent(this, Part4Activity.class);
+            launchIntent = new Intent(this, GithubUsersActivity.class);
             break;
         case R.id.btnPart5:
             launchIntent = new Intent(this, Part5Activity.class);

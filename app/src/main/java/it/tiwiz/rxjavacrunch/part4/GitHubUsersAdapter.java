@@ -22,6 +22,10 @@ public class GitHubUsersAdapter extends RecyclerView.Adapter<GitHubUsersAdapter.
 	private List<GitHubUser> users = new ArrayList<>();
 	private final GithubUserClickListener listener;
 
+	/**
+	 * Instantiate with the click listener.
+	 * @param listener
+	 */
 	public GitHubUsersAdapter(final GithubUserClickListener listener) {
 		this.listener = listener;
 	}
@@ -79,7 +83,7 @@ public class GitHubUsersAdapter extends RecyclerView.Adapter<GitHubUsersAdapter.
 		 *
 		 * @param user
 		 */
-		public void bindTo(GitHubUser user) {
+		public void bindTo(final GitHubUser user) {
 			userName.setText(user.getName());
 			userLogin.setText(user.getLogin());
 			userPage.setText(user.getReposUrl());
@@ -91,9 +95,9 @@ public class GitHubUsersAdapter extends RecyclerView.Adapter<GitHubUsersAdapter.
 
 		@Override
 		public void onClick(View v) {
-			final String requestedUser = userLogin.getText().toString();
+			final String requestedUserName = userLogin.getText().toString();
 
-			listener.onItemClicked(requestedUser);
+			listener.onItemClicked(requestedUserName);
 		}
 	}
 }
